@@ -1,0 +1,24 @@
+# ==========================================================================
+# SEIS-PERU  ·  dependencias de ANÁLISIS / MODELADO (Fases 2+)
+# Pesadas u opcionales; instalar cuando toque EDA / modelos.
+#   python -m pip install -r requirements-analysis.txt
+# ==========================================================================
+-r requirements.txt
+
+matplotlib>=3.8
+seaborn>=0.13
+scipy>=1.11
+scikit-learn>=1.4
+statsmodels>=0.14
+
+# Geoespacial
+shapely>=2.0
+geopandas>=0.14
+
+# Sismología / catálogos (obspy es grande; lectura QuakeML, utilidades)
+obspy>=1.4
+
+# Modelos de forecasting sísmico y evaluación CSEP
+# xgboost>=2.0
+# lightgbm>=4.1
+# pycsep>=0.6            # evaluación de forecasts (N-test, S-test, reliability)

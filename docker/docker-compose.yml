@@ -1,0 +1,37 @@
+# PostgreSQL + PostGIS para SEIS-PERU
+# Levantar:   docker compose -f docker/docker-compose.yml up -d
+# Los .sql de ../sql se ejecutan en orden alfabético en el PRIMER arranque
+# (cuando el volumen pgdata está vacío).
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: seis_peru_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: seis_peru
+      POSTGRES_USER: seis
+      POSTGRES_PASSWORD: seis
+      TZ: UTC
+      PGTZ: UTC
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ../sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U seis -d seis_peru"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Interfaz web opcional (descomentar si la quieres):
+  # pgadmin:
+  #   image: dpage/pgadmin4:latest
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@seis.local
+  #     PGADMIN_DEFAULT_PASSWORD: admin
+  #   ports: ["5050:80"]
+  #   depends_on: [db]
+
+volumes:
+  pgdata:

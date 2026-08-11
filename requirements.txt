@@ -1,0 +1,16 @@
+# ==========================================================================
+# SEIS-PERU  ·  Fase 1 (ingesta / catálogo)  ·  dependencias núcleo
+# Python 3.11+
+# Instalar:  python -m pip install -r requirements.txt
+# ==========================================================================
+requests>=2.31
+tenacity>=8.2          # reintentos con backoff para las APIs FDSN
+pandas>=2.1
+pyarrow>=14.0          # lectura/escritura Parquet
+numpy>=1.24
+pydantic>=2.5          # validación de esquema de eventos
+pydantic-settings>=2.1 # configuración por entorno (.env)
+pyyaml>=6.0
+python-dateutil>=2.8
+tqdm>=4.66             # barras de progreso en descargas largas
+psycopg2-binary>=2.9   # carga a PostgreSQL/PostGIS
